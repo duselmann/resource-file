@@ -11,10 +11,8 @@ public interface Response {
 	public URI getServiceDefinitionURI();
 	
 	/**
-	 * This is endpoint data for the service point that is taking responsibility
-	 * for the Response. It's possible that the request was further delegated,
-	 * but the CIDA Service management framework has no way of knowing about 
-	 * that. In the aggregation tree, this identifies a leaf node.
+	 * This is endpoint data for the ServicePoint that generated this Response.
+	 * 
 	 * @return 
 	 */
 	public URI getResponsibleEndpoint();
