@@ -28,8 +28,8 @@ proper separation of concerns. This API provides such a logical separation.
 
 Diagrams
 --------
-<img src='/images/request_distribution.png' alt='Diagram of Request Distribution process'/>
-<img src='/images/response_collection.png' alt='Diagram of Response Collection process'/>
+<img src='/images/request_distribution.png' height='360px' width='480px' alt='Diagram of Request Distribution process'/>
+<img src='/images/response_collection.png' height='360px' width='480px' alt='Diagram of Response Collection process'/>
 
 The Resource Definition URI
 ---------------------------
