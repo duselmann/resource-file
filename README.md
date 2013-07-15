@@ -26,6 +26,10 @@ be accessed by more than one path.
 This is basically not a hard problem, but it can become very hard without 
 proper separation of concerns. This API provides such a logical separation.
 
+Diagrams
+--------
+<img src='/images/request_distribution.svg' alt='Diagram of Request Distribution process'/>
+<img src='/images/response_collection.svg' alt='Diagram of Response Collection process'/>
 
 The Resource Definition URI
 ---------------------------
