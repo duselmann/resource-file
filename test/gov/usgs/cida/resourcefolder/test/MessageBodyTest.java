@@ -1,4 +1,4 @@
-package gov.usgs.cida.servicefolder.test;
+package gov.usgs.cida.resourcefolder.test;
 
 import org.junit.After;
 import org.junit.AfterClass;

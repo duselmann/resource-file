@@ -1,4 +1,4 @@
-package gov.usgs.cida.servicefolder;
+package gov.usgs.cida.resourcefolder;
 
 import java.net.URI;
 
@@ -6,20 +6,16 @@ import java.net.URI;
  * 
  * @author Bill Blondeau <wblondeau@usgs.gov>
  */
-public interface Response {
-	
-	public URI getServiceDefinitionURI();
+public interface Response extends Message {
 	
 	/**
-	 * This is endpoint data for the ServicePoint that generated this Response.
+	 * This is endpoint data for the ResourcePoint that generated this Response.
 	 * 
 	 * @return 
 	 */
 	public URI getResponsibleEndpoint();
 	
 	public StatusCode getStatus();
-	
-	public MessageBody getMessageBody();
 	
 	
 }

@@ -1,28 +1,25 @@
-package gov.usgs.cida.servicefolder;
+package gov.usgs.cida.resourcefolder;
 
 /**
- *
+ * @see http://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html
  * @author Bill Blondeau <wblondeau@usgs.gov>
  */
 public enum Verb {
-	GET ("GET", true, true, false),
-	PUT ("PUT", false, true, false),
-	DELETE ("DELETE", false, true, false),
-	POST ("POST", false, false, false),
-	HEAD ("HEAD", true, true, false),
-	FUNCTION ("FUNCTION", true, true, true);
+	GET ("GET", true, true),
+	PUT ("PUT", false, true),
+	DELETE ("DELETE", false, true),
+	POST ("POST", false, false),
+	HEAD ("HEAD", true, true);
 
 	private String name;
 	private boolean safe;
 	private boolean idempotent;
-	private boolean referentiallyTransparent;
 	
 	
 	private Verb(String name, boolean safe, 
-			boolean idempotent, boolean referentiallyTransparent) {
+			boolean idempotent) {
 		this.safe = safe;
 		this.idempotent = idempotent;
-		this.referentiallyTransparent = referentiallyTransparent;
 	}
 	
 	public boolean isSafe() {
@@ -33,9 +30,6 @@ public enum Verb {
 		return this.idempotent;
 	}
 
-	public boolean isReferentiallyTransparent() {
-		return this.referentiallyTransparent;
-	}
 	
 	@Override
 	public String toString() {

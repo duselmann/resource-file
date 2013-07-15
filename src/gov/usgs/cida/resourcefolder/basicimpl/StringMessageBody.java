@@ -1,7 +1,7 @@
-package gov.usgs.cida.servicefolder.basicimpl;
+package gov.usgs.cida.resourcefolder.basicimpl;
 
-import gov.usgs.cida.servicefolder.AuxiliaryDeliveryType;
-import gov.usgs.cida.servicefolder.MessageBody;
+import gov.usgs.cida.resourcefolder.ContentDeliveryType;
+import gov.usgs.cida.resourcefolder.MessageBody;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.io.Reader;
@@ -13,8 +13,8 @@ import org.w3c.dom.Document;
 /**
  * For the majority of cases in which a String message body is the natural
  * fit. No support for explicit XML (String content can be valid
- * XML serialization, of course.) Usable but not recommended for raw binary
- * data. @see ByteArrayMessageBody
+ * XML serialization, of course.) Not recommended for raw binary
+ * data.
  * 
  * Instances are immutable.
  * 
@@ -23,22 +23,22 @@ import org.w3c.dom.Document;
 public class StringMessageBody implements MessageBody {
 	
 	private String content;
-	private List<AuxiliaryDeliveryType> deliveryTypes = new ArrayList<>();
+	private List<ContentDeliveryType> deliveryTypes = new ArrayList<>();
 	
 	public StringMessageBody(String content) {
 		
 		// TODO sanity checks
 		
 		this.content = content;
-		this.deliveryTypes.add(AuxiliaryDeliveryType.STRING);
-		this.deliveryTypes.add(AuxiliaryDeliveryType.CHARACTER);
+		this.deliveryTypes.add(ContentDeliveryType.STRING);
+		this.deliveryTypes.add(ContentDeliveryType.CHARACTER);
 	}
 
 	@Override
-	public List<AuxiliaryDeliveryType> getAuxiliaryDeliveryTypes() {
-		return this.deliveryTypes;
+	public List<ContentDeliveryType> getContentDeliveryTypes() {
+		return new ArrayList<>(this.deliveryTypes);
 	}
-
+	
 	@Override
 	public InputStream deliverAsStream() {
 		InputStream stream = new ByteArrayInputStream(this.content.getBytes());
@@ -67,5 +67,4 @@ public class StringMessageBody implements MessageBody {
 	public Document deliverAsDOMDocument() throws UnsupportedOperationException {
 		throw new UnsupportedOperationException("Not supported.");
 	}
-	
 }

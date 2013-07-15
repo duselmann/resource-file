@@ -1,4 +1,4 @@
-package gov.usgs.cida.servicefolder;
+package gov.usgs.cida.resourcefolder;
 
 import java.net.MalformedURLException;
 import java.net.URI;
@@ -6,11 +6,17 @@ import java.net.URISyntaxException;
 
 /**
  * A noninstantiable library class providing functions of general utility
- * for CIDA Service Management.
+ * for CIDA Resource Management.
  * 
  * @author Bill Blondeau <wblondeau@usgs.gov>
  */
 public class Util {
+	
+	/**
+	 * The convention in HTTP is to use a carriage return-linefeed sequence
+	 * as a line terminator. That's this, provided as a convenience.
+	 */
+	public static final String CRLF = "\r\n";
 	
 	//to enforce noninstantiability
 	private Util() {}
@@ -40,7 +46,7 @@ public class Util {
 	
 
 	/**
-	 * Creates a formally correct HTTP Request message from the instance.
+	 * Creates a formally correct HTTP Request message from the parameter.
 	 * 
 	 * Note that the returned message must conform to the HTTP/1.1 format. 
 	 * Such conformance includes, but is not limited to:
@@ -50,11 +56,11 @@ public class Util {
 	 *		headers</li>
 	 * </ul>
 	 * Note that this Interface uses a nonstandard header for stashing the
-	 * information returned by getServiceURI(): <code>Service-definition</code>
+	 * information returned by getResourceURI(): <code>Resource-definition</code>
 	 * 
 	 * @return 
 	 */
-	public String serializeToHTTP() {
+	public String serializeToHTTP(Message message) {
 		return "bah!";
 	}
 	
@@ -65,13 +71,13 @@ public class Util {
 	 * <code>this.serializeToHttp().substring(0, this.indexOf("\r\n\r\n") + 1)</code>
 	 * if there is a message body, and identical to <code>this.serializeToHttp()</code>
 	 * if there is no message body.
+	 * 
 	 * The purpose of this method is primarily support for development and
-	 * diagnostics when uploading an inconveniently large file. Discarding 
-	 * the message body has no useful production function.
+	 * diagnostics when handling an inconveniently large file.
 	 * 
 	 * @return 
 	 */
-	public String serializeToBodilessHTTP() {
+	public String serializeToBodilessHTTP(Message message) {
 		return "bah!";
 	}
 }

@@ -1,9 +1,13 @@
-package gov.usgs.cida.servicefolder.basicimpl;
+package gov.usgs.cida.resourcefolder.basicimpl;
 
-import gov.usgs.cida.servicefolder.StatusCode;
-import gov.usgs.cida.servicefolder.MessageBody;
-import gov.usgs.cida.servicefolder.Response;
+import gov.usgs.cida.resourcefolder.StatusCode;
+import gov.usgs.cida.resourcefolder.MessageBody;
+import gov.usgs.cida.resourcefolder.Response;
+import gov.usgs.cida.resourcefolder.Util;
 import java.net.URI;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 /**
  *
@@ -11,23 +15,24 @@ import java.net.URI;
  */
 public class ResponseImpl implements Response {
 	
-	private URI serviceDefinitionURI;
+	private URI resourceDefinitionURI;
 	private URI responsibleEndpoint;
 	private StatusCode statusCode;
+	private Map<String, String> headers;
 	private MessageBody messageBody;
 	
-	public ResponseImpl(URI serviceDefinitionURI, URI responsibleEndpoint,
-			StatusCode statusCode, MessageBody messageBody) {
+	public ResponseImpl(URI resourceDefinitionURI, URI responsibleEndpoint,
+			StatusCode statusCode, Map<String, String> headers, MessageBody messageBody) {
 		
-		this.serviceDefinitionURI = serviceDefinitionURI;
+		this.resourceDefinitionURI = resourceDefinitionURI;
 		this.responsibleEndpoint = responsibleEndpoint;
 		this.statusCode = statusCode;
 		this.messageBody = messageBody;
 	}
 
 	@Override
-	public URI getServiceDefinitionURI() {
-		return this.serviceDefinitionURI;
+	public URI getResourceDefinitionURI() {
+		return this.resourceDefinitionURI;
 	}
 	
 	@Override
@@ -39,6 +44,11 @@ public class ResponseImpl implements Response {
 	public StatusCode getStatus() {
 		return this.statusCode;
 	}
+	
+	@Override
+	public Map<String, String> getHeaders() {
+		return new HashMap<>(this.headers);
+	}
 
 	@Override
 	public MessageBody getMessageBody() {
@@ -47,15 +57,24 @@ public class ResponseImpl implements Response {
 	
 	@Override
 	public String toString() {
-		String retval = "HTTP/1.1 " + this.statusCode + "\r\n";
-		// not doing headers just yet...
+		String retval = this.getHTTPStartLine() + Util.CRLF;
+		// headers
+		for (Iterator<String> it = this.headers.keySet().iterator(); it.hasNext();) {
+			String headername = it.next();
+			retval += headername + ": " + this.headers.get(headername) + Util.CRLF;
+		}
 		
 		// terminate headers
-		retval += "\r\n";
+		retval += Util.CRLF;
 		
 		retval += this.messageBody.deliverAsString();
 		
 		return retval;
+	}
+
+	@Override
+	public String getHTTPStartLine() {
+		return "HTTP/1.1 " + this.statusCode;
 	}
 
 	

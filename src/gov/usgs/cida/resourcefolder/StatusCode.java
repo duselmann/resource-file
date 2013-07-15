@@ -1,4 +1,4 @@
-package gov.usgs.cida.servicefolder;
+package gov.usgs.cida.resourcefolder;
 
 /**
  *
@@ -13,15 +13,15 @@ public enum StatusCode {
 			+ "is in the message body."),
 	BAD_REQUEST_400(400, "Bad Request", ""),
 	UNAUTHORIZED_401(401, "Unauthorized", "You must authenticate yourself "
-			+ "in order to use this service (assuming you have necessary "
+			+ "in order to access this resource (assuming you have necessary "
 			+ "permissions in the first place.)"),
 	FORBIDDEN_403(403, "Forbidden", "If you have authenticated, your "
 			+ "permissions were insufficient. If you have not authenticated,"
 			+ "it wouldn't help: your access is being denied for a reason that "
-			+ "exceeds permissions."),
+			+ "overrides permissions."),
 	NOT_FOUND_404(404, "Not Found", ""),
 	NOT_FOUND_405(405, "Method Not Allowed", "Your request specified an "
-			+ "HTTP method (GET, POST, etc) that this service does not support."),
+			+ "HTTP method (GET, POST, etc) that this resource does not support."),
 	SERVER_ERROR_500(500, "Internal Server Error", "");
 	
 	private Integer code;

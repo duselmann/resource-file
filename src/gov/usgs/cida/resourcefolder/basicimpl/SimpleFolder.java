@@ -1,9 +1,9 @@
-package gov.usgs.cida.servicefolder.basicimpl;
+package gov.usgs.cida.resourcefolder.basicimpl;
 
-import gov.usgs.cida.servicefolder.Folder;
-import gov.usgs.cida.servicefolder.Request;
-import gov.usgs.cida.servicefolder.Response;
-import gov.usgs.cida.servicefolder.ServicePoint;
+import gov.usgs.cida.resourcefolder.Folder;
+import gov.usgs.cida.resourcefolder.Request;
+import gov.usgs.cida.resourcefolder.Response;
+import gov.usgs.cida.resourcefolder.ResourcePoint;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -19,7 +19,7 @@ import org.w3c.dom.Document;
 public class SimpleFolder implements Folder {
 	
 	private URI folderURI;
-	private Set<ServicePoint> servicePoints = new HashSet<>();
+	private Set<ResourcePoint> resourcePoints = new HashSet<>();
 	private Set<Folder> childFolders = new HashSet<>();
 	
 	
@@ -30,9 +30,9 @@ public class SimpleFolder implements Folder {
 	}
 
 	@Override
-	public List<ServicePoint> getServicePoints() {
+	public List<ResourcePoint> getResourcePoints() {
 		// defensive copy
-		return new ArrayList<>(this.servicePoints);
+		return new ArrayList<>(this.resourcePoints);
 	}
 
 	@Override
@@ -47,7 +47,7 @@ public class SimpleFolder implements Folder {
 
 
 	@Override
-	public Response delegate(Request request) {
+	public Response distribute(Request request) {
 		
 		// this is where the delegation to all contained items happens.
 		
@@ -56,17 +56,17 @@ public class SimpleFolder implements Folder {
 		List<Response> collectedResponses = new ArrayList<>();
 		
 		// execute any 
-		for (Iterator<ServicePoint> it = this.servicePoints.iterator(); it.hasNext();) {
-			ServicePoint current = it.next();
-			if (request.getServiceDefinitionURI().equals(current.getServiceDefinitionURI())) {
+		for (Iterator<ResourcePoint> it = this.resourcePoints.iterator(); it.hasNext();) {
+			ResourcePoint current = it.next();
+			if (request.getResourceDefinitionURI().equals(current.getResourceDefinitionURI())) {
 
-				// make a Request copy aimed at the ServicePoint
-				Request toService = request.delegate(current.getEndpointURI());
+				// make a Request copy aimed at the ResourcePoint
+				Request toResource = request.delegate(current.getEndpointURI());
 				// call
-				Response fromService = current.callService(toService);
+				Response fromResource = current.callResource(toResource);
 				
 				// stash
-				collectedResponses.add(fromService);
+				collectedResponses.add(fromResource);
 			}
 		}
 		
@@ -77,14 +77,14 @@ public class SimpleFolder implements Folder {
 			// make a request and send it recursively
 			Request toChild = request.delegate(current.getFolderURI());
 
-			collectedResponses.add(current.delegate(toChild));
+			collectedResponses.add(current.distribute(toChild));
 		}
 		
 		return null;
 	}
 
 	@Override
-	public List<URI> getOfferedServices() {
+	public List<URI> getOfferedResources() {
 		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 	}
 	

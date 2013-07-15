@@ -1,6 +1,7 @@
-package gov.usgs.cida.servicefolder;
+package gov.usgs.cida.resourcefolder;
 
 import java.io.InputStream;
+import java.io.Reader;
 import java.lang.reflect.Array;
 import org.w3c.dom.Document;
 
@@ -17,20 +18,21 @@ import org.w3c.dom.Document;
  * delivery type corresponding to the enum.
  * 
  * Note that the return type for BYTE_ARRAY is <code>java.lang.reflect.Array</code>.
- * The "byte" part of <code>byte[]</code> is assumed, since no other array
- * type is particularly sensible for delivering a message body.
+ * The "byte" part of <code>byte[]</code> is assumed, since byte arrays are
+ * sometimes useful to deliver binary files.
  * 
  * @author Bill Blondeau <wblondeau@usgs.gov>
  */
-public enum AuxiliaryDeliveryType {
-	CHARACTER (InputStream.class),
+public enum ContentDeliveryType {
+	STREAM (InputStream.class),
+	CHARACTER (Reader.class),
 	BYTE_ARRAY (Array.class),
 	STRING (String.class),
 	DOM_DOCUMENT (Document.class);
 	
 	private final Class deliveryClass;
 	
-	private AuxiliaryDeliveryType(Class deliveryClass) {
+	private ContentDeliveryType(Class deliveryClass) {
 		this.deliveryClass = deliveryClass;
 	}
 	
