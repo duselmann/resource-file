@@ -142,10 +142,10 @@ Folder: the interface for the Resource Folder itself
 ----------------------------------------------------
 Folder has one primary method: 
 
-	- delegate(Request). When this method is invoked, the Folder distributes 
-		copies of the Request parameter to its contained Folders and
-		ResourcePoints. This method returns a Response object aggregating
-		the responses it receives.
+ - delegate(Request). When this method is invoked, the Folder distributes 
+   copies of the Request parameter to its contained Folders and
+   ResourcePoints. This method returns a Response object aggregating
+   the responses it receives.
 
 Folder also has methods for reporting its contents.
 
@@ -154,12 +154,12 @@ ResourcePoint: the interface for Resource Access
 ------------------------------------------------
 ResourcePoint has one primary method:
 
-	- callResource(Request). When this method is invoked, the ResourcePoint
-		sends the Request (or its logical equivalent as, for example, an
-		HTTP Request) to its associated external Resource. It then returns
-		the Resource's response to the request, or an error message if 
-		the Resource is unresponsive or unreachable. This method returns a 
-		Response object.
+ - callResource(Request). When this method is invoked, the ResourcePoint
+   sends the Request (or its logical equivalent as, for example, an
+   HTTP Request) to its associated external Resource. It then returns
+   the Resource's response to the request, or an error message if 
+   the Resource is unresponsive or unreachable. This method returns a 
+   Response object.
 
 ResourcePoint also has methods for reporting its status, including a special
 method for reporting progress on long-running requests.
@@ -170,26 +170,26 @@ Message, Request and Response: message content interfaces
 Message is the superinterface of Request and Response. It exposes data
 accessors for properties common to both message subtypes:
 
-	- Resource Definition URI (identifying Resource's behavior)
+ - Resource Definition URI (identifying Resource's behavior)
 
-	- A map of Headers (just like the HTTP Headers)
+ - A map of Headers (just like the HTTP Headers)
 
-	- a MessageBody object.
+ - a MessageBody object.
 
 Request defines a data object that is passed between components of this API 
 in the "outbound" direction. It exposes data accessors for:
 
-	- Verb (consistent with HTTP HEAD GET, PUT, DELETE, POST)
+ - Verb (consistent with HTTP HEAD GET, PUT, DELETE, POST)
 
-	- Endpoint URI (address of the destination Resource Point)
+ - Endpoint URI (address of the destination Resource Point)
 
 
 Response defines a data object that is passed between components of this API 
 in the "outbound" direction. It exposes data accessors for:
 
-	- Status code (useful subset of HTTP Status Codes.)
+ - Status code (useful subset of HTTP Status Codes.)
 
-	- Endpoint URI (address of the Resource Point that provided the response)
+ - Endpoint URI (address of the Resource Point that provided the response)
 
 There are also some convenience methods.
 
