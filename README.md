@@ -30,12 +30,14 @@ Diagrams
 --------
 When an incoming HTTP resource request arrives, it is converted into CIDA Request
 messages and distributed to all known implementations of that resource Definition:
+
 <img src='/images/request_distribution.png' height='360px' width='480px' alt='Diagram of Request Distribution process'/>
 
 As the resources respond to the Request, those responses are returned as CIDA 
 Response messages and combined in a lossless XML representation. The content
 of those nested Responses is merged and formatted before being returned
 to the requesting user.
+
 <img src='/images/response_collection.png' height='360px' width='480px' alt='Diagram of Response Collection process'/>
 
 The Resource Definition URI
