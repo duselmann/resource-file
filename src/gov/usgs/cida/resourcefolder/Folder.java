@@ -2,6 +2,7 @@ package gov.usgs.cida.resourcefolder;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Set;
 import org.w3c.dom.Document;
 
 /**
@@ -34,9 +35,9 @@ public interface Folder {
 	 */
 	public URI getFolderURI();
 	
-	public List<ResourcePoint> getResourcePoints();
+	public Set<ResourcePoint> getResourcePoints();
 	
-	public List<Folder> getContainedFolders();
+	public Set<Folder> getContainedFolders();
 	
 	/**
 	 * An optional convenience method listing all Resource Definition URIs 
@@ -47,7 +48,7 @@ public interface Folder {
 	 * 
 	 * @return the URIs of all Resources accessible through the current instance.
 	 */
-	public List<URI> getOfferedResources();
+	public Set<URI> getOfferedResources();
 	
 	/**
 	 * A method specifically intended for reporting availability
@@ -92,5 +93,8 @@ public interface Folder {
 	 * be left as plain text if that's the understood target form.
 	 */
 	public Response distribute(Request request);
+	
+	
+	public Response collect(List<Response> collectedResponses);
 
 }

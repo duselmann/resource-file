@@ -1,8 +1,11 @@
 package gov.usgs.cida.resourcefolder;
 
+import java.io.OutputStream;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.List;
+import org.w3c.dom.Document;
 
 /**
  * A noninstantiable library class providing functions of general utility
@@ -79,5 +82,19 @@ public class Util {
 	 */
 	public String serializeToBodilessHTTP(Message message) {
 		return "bah!";
+	}
+	
+	/**
+	 * takes a list of <code>Response</code> objects and bundles them into
+	 * an XML DOM Document. Expected use is to make a messagebody.
+	 * @param collectedResponses
+	 * @return 
+	 */
+	public Document makeResponseTree(List<Response> collectedResponses) {
+		return null;
+	}
+	
+	public OutputStream makeResponseStream(List<Response> collectedResponses) {
+		return null;
 	}
 }

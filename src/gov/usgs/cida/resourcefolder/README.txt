@@ -185,12 +185,3 @@ by the "Content-Type" header (example: " text/html; charset=UTF-8".)
 If implementations wish to provide some other String representation of the 
 message body, that fact should be clearly noted in the overriding method's 
 Javadocs.
-
-
-
-
-
-
-
-
-

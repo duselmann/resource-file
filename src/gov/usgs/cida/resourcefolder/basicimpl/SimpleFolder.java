@@ -30,14 +30,14 @@ public class SimpleFolder implements Folder {
 	}
 
 	@Override
-	public List<ResourcePoint> getResourcePoints() {
+	public Set<ResourcePoint> getResourcePoints() {
 		// defensive copy
-		return new ArrayList<>(this.resourcePoints);
+		return new HashSet<>(this.resourcePoints);
 	}
 
 	@Override
-	public List<Folder> getContainedFolders() {
-		return new ArrayList<>(this.childFolders);
+	public Set<Folder> getContainedFolders() {
+		return new HashSet<>(this.childFolders);
 	}
 
 	@Override
@@ -80,12 +80,20 @@ public class SimpleFolder implements Folder {
 			collectedResponses.add(current.distribute(toChild));
 		}
 		
+		// TODO BUNDLE Collected Responses INTO ONE !!!
+		
+		
 		return null;
 	}
 
 	@Override
-	public List<URI> getOfferedResources() {
+	public Set<URI> getOfferedResources() {
 		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+	}
+
+	@Override
+	public Response collect(List<Response> collectedResponses) {
+		return null;
 	}
 	
 }
